@@ -1,1 +1,2 @@
-# magmatart.github.io
+# Exponential
+
