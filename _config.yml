@@ -1,0 +1,19 @@
+remote_theme : BlackrockDigital/startbootstrap-clean-blog-jekyll
+
+title:             Exponential
+email:             magmatart@gmail.com
+description:       Believe that Professionality and spend time are exponential.
+author:            Soomin Lee
+baseurl:           ""
+url:               "http://magmatart.github.io"
+
+# Social Profiles
+github_username:   MagmaTart
+
+# Build settings
+markdown:          kramdown
+paginate:          5
+paginate_path:     "/posts/page:num/"
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
