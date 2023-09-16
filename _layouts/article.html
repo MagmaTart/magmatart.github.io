@@ -1,0 +1,52 @@
+---
+layout: page
+type: article
+---
+
+{%- include snippets/assign.html
+  target = site.data.variables.default.page.sharing
+  source0=layout.sharing source1=page.sharing -%}
+{%- assign _sharing = __return -%}
+
+{% if page.use_math %}
+  {% include mathjax_support.html %}
+{% endif %}
+
+
+<div class="layout--article">
+  {%- include article/top/custom.html -%}
+
+  <div class="article__content" itemprop="articleBody">{{ content }}</div>
+
+  {%- if _sharing -%}
+    <section class="article__sharing d-print-none">{%- include sharing.html -%}</section>
+  {%- endif -%}
+
+  <div class="d-print-none">
+    {%- include article-footer.html -%}
+    {%- include article-section-navigator.html -%}
+  </div>
+
+  <div>
+    <script src="https://giscus.app/client.js"
+      data-repo="MagmaTart/magmatart.github.io"
+      data-repo-id="MDEwOlJlcG9zaXRvcnkxNzkyMjAzNjc="
+      data-category="General"
+      data-category-id="DIC_kwDOCq6vj84CZRN2"
+      data-mapping="url"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="light_protanopia"
+      data-lang="ko"
+      crossorigin="anonymous"
+      async>
+    </script>
+    </div>
+
+</div>
+
+<script>
+  {%- include scripts/article.js -%}
+</script>
