@@ -70,8 +70,6 @@ __Part-aware Sampling__ 은 특정 Proposal에서 Classification loss를 계산�
 
 ![](https://user-images.githubusercontent.com/20470274/58798683-3104c000-863e-11e9-9673-5936bd8fb432.png)
 
-
-
 ![](https://user-images.githubusercontent.com/20470274/58797368-ce5df500-863a-11e9-9893-30520dfd2116.png)
 
 Part-aware Sampling의 예를 보여주는 그림입니다. (a)는 이미지 상의 GT를 표시한 그림으로, 자동차와 사람에 대한 GT가 표시되어 있습니다. (b)는 Detector가 만들어낸 Proposal들입니다. (c)는 자동차와 사람의 GT 안에 포함된 Proposal들을 각각 그린 그림입니다. Part-aware Sampling을 거치면, 사람의 GT 안에 포함된 보라색 Proposal들에 대해서는 사람의 Sub-category인 '신발', '사람 얼굴' 등과의 Loss가 무시될 것입니다. 또한 자동차의 GT 안에 포함된 초록색 Proposal들에 대해서는 '번호판', '타이어' 등이 무시됩니다.
@@ -99,7 +97,6 @@ Part-aware Sampling과의 성능 비교를 위한 기존 Approach인 Pseudo labe
 동시에 관찰된 또 하나의 놀라운 결과가 있습니다. 아래에 제시된 표와 그래프에 나타나는 바와 같이, 주로 Part에 속하는 카테고리의 물체들에 대한 mAP가 놀라운 수준으로 향상된 것입니다.
 
 ![](https://user-images.githubusercontent.com/20470274/59141247-2a7e9b80-89e4-11e9-88a3-8992d7694b84.png)
-
 
 
 ![](https://user-images.githubusercontent.com/20470274/59141250-42561f80-89e4-11e9-9e35-70a3f84ad88a.png)

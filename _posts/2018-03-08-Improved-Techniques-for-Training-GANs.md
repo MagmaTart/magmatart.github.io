@@ -94,40 +94,40 @@ $$\exp(\mathbb{E}_{\boldsymbol{x}} \ \text{KL}(p(y \vert \boldsymbol{x}) \ \| \ 
 값의 비교를 쉽게 하기 위해서 Exponential을 취합니다. $$p(y \vert \boldsymbol{x})$$와 $$p(y)$$의 엔트로피 차이가 커질수록 위 식의 값은 커집니다. 그리고 엔트로피 차이가 커진다는 것은, 이미지 생성이 다양하면서도 정확해진다는 이야기입니다. 논문에서는 이 metric이 사람의 판단에 의한 성능 평가만큼 좋은 메트릭임을 보였다고 소개하고 있습니다. 또한 일정하게 정해졌으며 자동으로 구할 수 있는 메트릭을 사용함으로써, 샘플의 개수가 매우 많은 경우에도 샘플 생성의 다양성을 측정할 수 있는 지표가 생겼다고 말하고 있습니다.
 
 ### Semi-supervised Learning
- 입력 데이터 $$\boldsymbol{x}$$를 $$K$$개의 클래스로 분류하는 분류기가 있다고 합시다. 이 모델은 $$\boldsymbol{x}$$를 입력으로 받아 길이가 $$K$$인 벡터 $$\{ l_1, ..., l_K \}$$를 출력합니다. 이 벡터에 SOFTMAX를 적용하면 아래와 같이 각 클래스일 가능성(Probabilities)로 변경됩니다.
+입력 데이터 $$\boldsymbol{x}$$를 $$K$$개의 클래스로 분류하는 분류기가 있다고 합시다. 이 모델은 $$\boldsymbol{x}$$를 입력으로 받아 길이가 $$K$$인 벡터 $$\{ l_1, ..., l_K \}$$를 출력합니다. 이 벡터에 SOFTMAX를 적용하면 아래와 같이 각 클래스일 가능성(Probabilities)로 변경됩니다.
  
 $$p_{\text{model}}(y = j \vert \boldsymbol{x}) = \tfrac{\exp(l_j)}{\Sigma^K_{k=1} \exp(l_k)}$$
  
- 분류기 모델의 Supervised Learning에서는, 정답 레이블과 모델의 클래스 예측 $$p_{\text{model}}(y \vert \boldsymbol{x})$$ 간의 Cross-Entropy를 최소화하는 방향으로 학습합니다.
+분류기 모델의 Supervised Learning에서는, 정답 레이블과 모델의 클래스 예측 $$p_{\text{model}}(y \vert \boldsymbol{x})$$ 간의 Cross-Entropy를 최소화하는 방향으로 학습합니다.
  
- 논문의 저자들은 이 분류기의 학습 방식을 이용해 GAN의 Semi-supervised Learning을 제안합니다. 분류기의 학습을 위한 데이터셋에 Generator가 생성한 샘플들을 "generated"라는 새로운 클래스로 추가합니다. 이 클래스의 레이블은 $$y = K + 1$$이며, 따라서 분류기의 출력 벡터의 길이는 $$K + 1$$가 됩니다. 이 때, $$p_{\text{model}}(y = K+1 \vert \boldsymbol{x})$$는 입력 $$\boldsymbol{x}$$가 Generator가 생성한 가짜 이미지일 확률을 의미합니다. 이는 곧 Original한 GAN Objective 내의 $$1 - D(x)$$와 같습니다.
+논문의 저자들은 이 분류기의 학습 방식을 이용해 GAN의 Semi-supervised Learning을 제안합니다. 분류기의 학습을 위한 데이터셋에 Generator가 생성한 샘플들을 "generated"라는 새로운 클래스로 추가합니다. 이 클래스의 레이블은 $$y = K + 1$$이며, 따라서 분류기의 출력 벡터의 길이는 $$K + 1$$가 됩니다. 이 때, $$p_{\text{model}}(y = K+1 \vert \boldsymbol{x})$$는 입력 $$\boldsymbol{x}$$가 Generator가 생성한 가짜 이미지일 확률을 의미합니다. 이는 곧 Original한 GAN Objective 내의 $$1 - D(x)$$와 같습니다.
  
- 위의 사실을 이용하면 GAN의 Objective를 마치 Supervised Learning과 같이 바라볼 수 있습니다. 논문에서는 두 개의 Loss를 이용해 Semi-supervised Learning을 도입합니다.
+위의 사실을 이용하면 GAN의 Objective를 마치 Supervised Learning과 같이 바라볼 수 있습니다. 논문에서는 두 개의 Loss를 이용해 Semi-supervised Learning을 도입합니다.
  
- $$L = L_\text{supervised} + L_\text{unsupervised}$$
+$$L = L_\text{supervised} + L_\text{unsupervised}$$
  
- 먼저 Supervised Loss $$L_\text{supervised}$$는, 데이터셋 내 진짜 데이터들에 대한 분류기 학습을 진행합니다.
+먼저 Supervised Loss $$L_\text{supervised}$$는, 데이터셋 내 진짜 데이터들에 대한 분류기 학습을 진행합니다.
  
 $$L_\text{supervised} = -\mathbb{E}_{\boldsymbol{x}, y \sim p_{\text{data}}(\boldsymbol{x}, y)}\log p_\text{model}(y \vert \boldsymbol{x}, y < K + 1)$$
  
- 그리고 Unsupervised Loss $$L_\text{unsupervised}$$는, 일반적인 GAN Game의 Objective Function과 동일한 모습입니다.
+그리고 Unsupervised Loss $$L_\text{unsupervised}$$는, 일반적인 GAN Game의 Objective Function과 동일한 모습입니다.
  
 $$L_\text{unsupervised} = \{\mathbb{E}_{\boldsymbol{x} \sim p_\text{data}(\boldsymbol{x})} \log D(x) + \mathbb{E}_{z \sim \text{noise}} \log (1-D(G(z)))\}$$
   
- 위에서  $$p_{\text{model}}(y = K+1 \vert \boldsymbol{x})$$이 $$1 - D(x)$$와 같다고 했으므로, 다음과 같이 바꿀 수 있습니다.
+위에서  $$p_{\text{model}}(y = K+1 \vert \boldsymbol{x})$$이 $$1 - D(x)$$와 같다고 했으므로, 다음과 같이 바꿀 수 있습니다.
  
 $$\small{L_\text{unsupervised} = -\{\mathbb{E}_{\boldsymbol{x} \sim p_\text{data}(\boldsymbol{x})} \log[1 - p_\text{model}(y = K + 1 \vert \boldsymbol{x})] + \mathbb{E}_{\boldsymbol{x} \sim G} \log[p_\text{model}(y = K + 1 \vert \boldsymbol{x})]\}}$$
  
- Unsupervised Loss를 사용한 Semi-supervised Learning은 $$G$$ 모델을 트레이닝하는 데에서 Minibatch Discrimination보다 더 좋은 성능을 보여주었다고 논문에서는 소개하고 있습니다.
+Unsupervised Loss를 사용한 Semi-supervised Learning은 $$G$$ 모델을 트레이닝하는 데에서 Minibatch Discrimination보다 더 좋은 성능을 보여주었다고 논문에서는 소개하고 있습니다.
  
- #### Importance of labels for image quality
- Semi-supervised Learning을 도입하면, 모델의 성능 평가를 인간의 판단으로 진행헀을 때에, Generator의 이미지 생성 품질이 향상되는 놀라운 효과도 거둘 수 있었습니다. 논문에서는, 사람의 시각 시스템이 어떤 물체를 분류할 때, 물체의 특징을 파악할 수 있는 이미지의 일부에 강하게 반응하는 것과 같은 맥락이라고 설명합니다. Discriminator가 이미지의 클래스를 분류하도록 학습함으로써, 인간의 시각 시스템이 강조해서 보는 이미지의 특징을 Generator가 개발하도록 만들어준다는 것입니다.
+#### Importance of labels for image quality
+Semi-supervised Learning을 도입하면, 모델의 성능 평가를 인간의 판단으로 진행헀을 때에, Generator의 이미지 생성 품질이 향상되는 놀라운 효과도 거둘 수 있었습니다. 논문에서는, 사람의 시각 시스템이 어떤 물체를 분류할 때, 물체의 특징을 파악할 수 있는 이미지의 일부에 강하게 반응하는 것과 같은 맥락이라고 설명합니다. Discriminator가 이미지의 클래스를 분류하도록 학습함으로써, 인간의 시각 시스템이 강조해서 보는 이미지의 특징을 Generator가 개발하도록 만들어준다는 것입니다.
  
- ### Experiments
- ![](/assets/posts/images/ImproveGAN/figure3.PNG)
+### Experiments
+![](/assets/posts/images/ImproveGAN/figure3.PNG)
 
- MNIST 생성 실험 결과입니다. 왼쪽은 Semi-supervised Learning만 적용한 결과이고, 오른쪽은 Minibatch Discrimination을 적용한 결과입니다.
+MNIST 생성 실험 결과입니다. 왼쪽은 Semi-supervised Learning만 적용한 결과이고, 오른쪽은 Minibatch Discrimination을 적용한 결과입니다.
  
- ![](/assets/posts/images/ImproveGAN/figure5.PNG)
+![](/assets/posts/images/ImproveGAN/figure5.PNG)
  
- 이번엔 ImageNet 데이터셋입니다. 왼쪽은 일반 DCGAN이고, 오른쪽은 이 논문의 여러 방법(Semi-supervised Learning, Feature Matching) 등을 활용한 결과입니다.
+이번엔 ImageNet 데이터셋입니다. 왼쪽은 일반 DCGAN이고, 오른쪽은 이 논문의 여러 방법(Semi-supervised Learning, Feature Matching) 등을 활용한 결과입니다.
