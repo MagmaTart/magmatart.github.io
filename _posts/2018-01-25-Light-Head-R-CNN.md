@@ -60,7 +60,7 @@ $$\text{C}_{\text{in}}$$은 입력 채널 수입니다. $$\text{C}_{\text{mid}}$
 
 ### Training / Testing
 
-최종적으로 논문에서 목표하는 궁극적인 모델을 트레이닝할 때는, 세팅 $$\text{L}을 그대로 유지한 채 Backbone Network를 ResNet-101에서 Xception-like하게 직접 만든 네트워크로 대체했다고 합니다. 그 네트워크의 구조는 아래 표와 같습니다.
+최종적으로 논문에서 목표하는 궁극적인 모델을 트레이닝할 때는, 세팅 $$\text{L}$$을 그대로 유지한 채 Backbone Network를 ResNet-101에서 Xception-like하게 직접 만든 네트워크로 대체했다고 합니다. 그 네트워크의 구조는 아래 표와 같습니다.
 
 ![](/assets/posts/images/LightHead/XcepBackbone.PNG)
 
