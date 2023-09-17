@@ -42,13 +42,13 @@ more tests.
 
 ![](/assets/posts/images/LightHead/ModelStructure.PNG)
 
-논문의 저자들은 모델을 구현할 떄 두 가지 케이스로 나누어서 진행했습니다. 약간의 세팅만 달리 하고 나머지 파라미터들은 모두 공유하는 모델 $$S$$와 $$L$$을 동시에 만들었습니다. 세팅 $$L$$은 Large Backbone Network를 가지는 모델로, Performance를 검사하기 위한 목적으로 구현됩니다. 세팅 $$S$$는 Small Backbone Network를 가지는 모델로, 모델의 Efficiency를 테스트하기 위한 목적으로 사용됩니다. 나머지의 모든 세팅은 두 모델이 공유합니다. $$L$$ 모델은 Basic feature extractor, 즉 Backbone Network로 ResNet-101을 사용했고, $$S$$ 모델은 Xception-like 모델을 사용하였습니다.
+논문의 저자들은 모델을 구현할 떄 두 가지 케이스로 나누어서 진행했습니다. 약간의 세팅만 달리 하고 나머지 파라미터들은 모두 공유하는 모델 $$\text{S}$$와 $$\text{L}$$을 동시에 만들었습니다. 세팅 $$\text{L}$$은 Large Backbone Network를 가지는 모델로, Performance를 검사하기 위한 목적으로 구현됩니다. 세팅 $$\text{S}$$는 Small Backbone Network를 가지는 모델로, 모델의 Efficiency를 테스트하기 위한 목적으로 사용됩니다. 나머지의 모든 세팅은 두 모델이 공유합니다. $$\text{L}$$ 모델은 Basic feature extractor, 즉 Backbone Network로 ResNet-101을 사용했고, $$\text{S}$$ 모델은 Xception-like 모델을 사용하였습니다.
 
 두 모델을 기반으로 위의 중요점들을 천천히 살펴보겠습니다. 먼저 Xception과 Separable Convolution은, [동명의 논문](https://arxiv.org/abs/1610.02357)에서 제안한 방법론입니다. 이를 참고해서 이 논문에서 Separable Convolution을 구현한 모양은 다음과 같습니다.
 
 ![](/assets/posts/images/LightHead/LargeSeparable.PNG)
 
-$$C_{in}$$은 입력 채널 수입니다. $$C_{mid}$$는 중간 파라미터로, $$S$$ 모델은 64, $$L$$ 모델은 256으로 설정하였습니다. $$C_{out}$$은 $$10 \times p \times p$$에 맞추는데, $$p$$는 RoI Pooling의 사이즈로, 논문에서는 7을 사용하였습니다. 따라서 490으로 맞춰졌습니다.
+$$\text{C}_{\text{in}}$$은 입력 채널 수입니다. $$\text{C}_{\text{mid}}$$는 중간 파라미터로, $$\text{S}$$ 모델은 64, $$\text{L}$$ 모델은 256으로 설정하였습니다. $$\text{C}_{\text{out}}$$은 $$10 \times p \times p$$에 맞추는데, $$p$$는 RoI Pooling의 사이즈로, 논문에서는 7을 사용하였습니다. 따라서 490으로 맞춰졌습니다.
 
 이런 방식의 Separable Convolution은 Backbone Network의 출력 Feature map에서 R-CNN subnet으로 넘어가는 Feature map을 만드는 과정에서 사용됩니다. 넓은 Receptive Field를 보는 것을 유지하면서도 강한 Feature Extraction을 하기 위해 이 방식을 도입했다고 합니다. 이는 Backbone의 마지막 Feature를 잘 담고 있으면서도 얇은 Feature map을 만들어낼 수 있게 해 줍니다. 논문에서는 COCO 데이터셋을 사용했을 경우로 예를 들고 있습니다. COCO 이미지들의 클래스는 80개입니다. 이 때, R-FCN에서 7 x 7 사이즈의 PS RoI Pooling을 적용하기 전 마지막 Feature map의 Depth는 (81 x 7 x 7) = 3969입니다. 엄청 두꺼운 것을 볼 수 있죠. 하지만 이 논문의 방법을 사용하면, 같은 경우의 Depth를 (10 x 7 x 7) = 490으로 줄일 수 있습니다. 이렇게 Feature Map이 얇아지면, 메모리 사용량이 감소하고 속도가 향상될 수 밖에 없다는 것입니다.
 
@@ -60,7 +60,7 @@ $$C_{in}$$은 입력 채널 수입니다. $$C_{mid}$$는 중간 파라미터로,
 
 ### Training / Testing
 
-최종적으로 논문에서 목표하는 궁극적인 모델을 트레이닝할 때는, 세팅 L을 그대로 유지한 채 Backbone Network를 ResNet-101에서 Xception-like하게 직접 만든 네트워크로 대체했다고 합니다. 그 네트워크의 구조는 아래 표와 같습니다.
+최종적으로 논문에서 목표하는 궁극적인 모델을 트레이닝할 때는, 세팅 $$\text{L}을 그대로 유지한 채 Backbone Network를 ResNet-101에서 Xception-like하게 직접 만든 네트워크로 대체했다고 합니다. 그 네트워크의 구조는 아래 표와 같습니다.
 
 ![](/assets/posts/images/LightHead/XcepBackbone.PNG)
 
