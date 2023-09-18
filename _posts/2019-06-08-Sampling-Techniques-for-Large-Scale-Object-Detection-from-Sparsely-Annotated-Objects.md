@@ -6,6 +6,7 @@ modify_date: 2019-06-08 12:00:00 -0400
 tags:
 - Deep Learning
 - Paper Reading
+- Object Detection
 category: 
 - deep learning
 use_math: true
