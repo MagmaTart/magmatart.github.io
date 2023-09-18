@@ -33,12 +33,21 @@ layout: page
 
 <div style="margin-top: 20px; margin-bottom: 20px">
   <div style="margin-bottom: 10px"><b>Some music I currently addicted to :)</b></div>
-  <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1242791686&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
-  <!-- <div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
-    <a href="https://soundcloud.com/daeya_music" title="Daeya" target="_blank" style="color: #cccccc; text-decoration: none;">Daeya</a>
-    <a href="https://soundcloud.com/daeya_music/polaroid-emotion-clip" title="POLAROID EMOTION" target="_blank" style="color: #cccccc; text-decoration: none;">POLAROID EMOTION</a>
-  </div> -->
+  <iframe id="player" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1242791686&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
 </div>
+
+<script>
+  let musicList = [
+    "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1242791686&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
+    "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1380494896&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
+    "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/858324415&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
+    "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1553315872&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", 
+    "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/867129322&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
+  ]
+  let number = Math.floor(Math.random()*5);
+  let player = document.getElementById("player")
+  player.setAttribute("src", musicList[number]);
+</script>
 
 <hr></hr>
 
