@@ -9,142 +9,172 @@
 
 <url>
   <loc>https://magmatart.dev/</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/archive.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/about.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://magmatart.dev/deep%20learning/2019/06/08/Sampling-Techniques-for-Large-Scale-Object-Detection-from-Sparsely-Annotated-Objects-copy-2.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <loc>https://magmatart.dev/deep%20learning/2019/06/08/Sampling-Techniques-for-Large-Scale-Object-Detection-from-Sparsely-Annotated-Objects.html</loc>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/archive.html?tag=Deep+Learning</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/archive.html?tag=Paper+Reading</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://magmatart.dev/archive.html?tag=Object+Detection</loc>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2019/06/03/NAS-FPN.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://magmatart.dev/archive.html?tag=Neural+Archiecture+Search</loc>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2018/06/10/ucdig.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://magmatart.dev/archive.html?tag=GAN</loc>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2018/03/30/SRGAN.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2018/03/16/AlexNet.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://magmatart.dev/archive.html?tag=CNN</loc>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2018/03/09/Improved-Techniques-for-Training-GANs.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2018/03/02/EBGAN.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2018/02/23/SimGAN.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/page2/</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/page3/</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2018/02/02/CycleGAN.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2018/01/26/Light-Head-R-CNN.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2018/01/19/MaskRCNN.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2018/01/12/Focal-Loss-for-Dense-Object-Detection.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2018/01/05/InfoGAN.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2017/12/29/DCGAN.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://magmatart.dev/deep%20learning/2017/12/22/GAN.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <loc>https://magmatart.dev/deep%20learning/2017/12/22/CGAN.html</loc>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2017/12/15/deformable-CNN.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2017/12/08/SSD.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://magmatart.dev/deep%20learning/2017/12/04/CGAN.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <loc>https://magmatart.dev/deep%20learning/2017/12/04/GAN.html</loc>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2017/12/01/YOLO.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2017/11/24/Faster-RCNN.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://magmatart.dev/deep%20learning/2017/11/17/FCN.html</loc>
-  <lastmod>2023-09-17T05:02:08+00:00</lastmod>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://magmatart.dev/archive.html?tag=Instance+Segmentation</loc>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://magmatart.dev/archive.html?tag=Semantic+Segmentation</loc>
+  <lastmod>2023-09-18T08:25:25+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 
