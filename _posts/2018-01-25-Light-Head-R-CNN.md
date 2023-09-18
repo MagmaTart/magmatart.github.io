@@ -1,22 +1,22 @@
 ---
 layout: article
-title:  "Light-Head R-CNN"
+title:  "Light-Head R-CNN: In Defense of Two-Stage Object Detector"
 date: 2018-01-25 21:00:00 -0400
 modify_date: 2018-01-25 21:00:00 -0400
 tags:
 - Deep Learning
 - Paper Reading
+- Object Detection
 category: 
 - deep learning
 use_math: true
 ---
 
-:+1:
-more tests.
+::memo: __논문 리딩 스터디 #12__: 매우 빠르고 강력한 Two-Stage Detector를 주장하는 Light-Head R-CNN 논문을 읽고 정리해봅니다.
 
 <!--more-->
-
-[원 논문 : Light-Head R-CNN: In Defense of Two-Stage Object Detector](https://arxiv.org/abs/1711.07264)
+-----
+논문 링크: [Light-Head R-CNN: In Defense of Two-Stage Object Detector](https://arxiv.org/pdf/1711.07264.pdf)
 
 ### Introduction
 이 논문은 제목에서도 볼 수 있듯이, '왜 Two-Stage Detector들은 이렇게 느린가?' 라는 의문에서 시작합니다. 그리고 현존하는 어떤 Object Detection 모델들보다 훨씬 빠르고 강력한 모델인 __Light-Head R-CNN__ 을 고안해냅니다.
@@ -40,13 +40,13 @@ more tests.
 
 논문에서는 기존 Faster R-CNN, R-FCN과 모델의 구조를 비교하고 있습니다. 모델의 전체적인 모양을 볼 수 있습니다.
 
-![](/assets/posts/images/LightHead/ModelStructure.PNG)
+<p align="center"><image src="/assets/posts/images/LightHead/ModelStructure.PNG"/></p>
 
 논문의 저자들은 모델을 구현할 떄 두 가지 케이스로 나누어서 진행했습니다. 약간의 세팅만 달리 하고 나머지 파라미터들은 모두 공유하는 모델 $$\text{S}$$와 $$\text{L}$$을 동시에 만들었습니다. 세팅 $$\text{L}$$은 Large Backbone Network를 가지는 모델로, Performance를 검사하기 위한 목적으로 구현됩니다. 세팅 $$\text{S}$$는 Small Backbone Network를 가지는 모델로, 모델의 Efficiency를 테스트하기 위한 목적으로 사용됩니다. 나머지의 모든 세팅은 두 모델이 공유합니다. $$\text{L}$$ 모델은 Basic feature extractor, 즉 Backbone Network로 ResNet-101을 사용했고, $$\text{S}$$ 모델은 Xception-like 모델을 사용하였습니다.
 
 두 모델을 기반으로 위의 중요점들을 천천히 살펴보겠습니다. 먼저 Xception과 Separable Convolution은, [동명의 논문](https://arxiv.org/abs/1610.02357)에서 제안한 방법론입니다. 이를 참고해서 이 논문에서 Separable Convolution을 구현한 모양은 다음과 같습니다.
 
-![](/assets/posts/images/LightHead/LargeSeparable.PNG)
+<p align="center"><image width="400" src="/assets/posts/images/LightHead/LargeSeparable.PNG"/></p>
 
 $$\text{C}_{\text{in}}$$은 입력 채널 수입니다. $$\text{C}_{\text{mid}}$$는 중간 파라미터로, $$\text{S}$$ 모델은 64, $$\text{L}$$ 모델은 256으로 설정하였습니다. $$\text{C}_{\text{out}}$$은 $$10 \times p \times p$$에 맞추는데, $$p$$는 RoI Pooling의 사이즈로, 논문에서는 7을 사용하였습니다. 따라서 490으로 맞춰졌습니다.
 
@@ -62,7 +62,7 @@ $$\text{C}_{\text{in}}$$은 입력 채널 수입니다. $$\text{C}_{\text{mid}}$
 
 최종적으로 논문에서 목표하는 궁극적인 모델을 트레이닝할 때는, 세팅 $$\text{L}$$을 그대로 유지한 채 Backbone Network를 ResNet-101에서 Xception-like하게 직접 만든 네트워크로 대체했다고 합니다. 그 네트워크의 구조는 아래 표와 같습니다.
 
-![](/assets/posts/images/LightHead/XcepBackbone.PNG)
+<p align="center"><image width="400" src="/assets/posts/images/LightHead/XcepBackbone.PNG"/></p>
 
 S는 Separable branch의 개수, Rep는 반복 횟수를 의미합니다. 이렇게 해도 생각보다는 깊어 보이는듯 합니다.
 
@@ -74,8 +74,8 @@ RoI는 트레이닝 시에 2000개, 테스트 시에 1000개를 사용합니다.
 
 심히 놀라우면서도 믿기지 않는 결과입니다. Faster R-CNN 류의 Two-Stage Detector를 기반으로 하고 있음에도 불구하고 __102 fps__ 라는 말도 안되는 속도가 나왔습니다. 아래는 다른 기존 모델들과 비교한 결과입니다.
 
-![](/assets/posts/images/LightHead/Result1.PNG)
+<p align="center"><image width="400" src="/assets/posts/images/LightHead/Result1.PNG"/></p>
 
 아래는 Light-Head R-CNN을 이용한 Detection 테스트 결과입니다. 매우 작은 물체도 정확하게 잡아내는 것을 볼 수 있습니다. 이 정도 수준의 Detecting을 102 fps로 할 수 있다는건 정말 획기적인 일인 것 같습니다.
 
-![](/assets/posts/images/LightHead/Result2.PNG)
+<p align="center"><image src="/assets/posts/images/LightHead/Result2.PNG"/></p>

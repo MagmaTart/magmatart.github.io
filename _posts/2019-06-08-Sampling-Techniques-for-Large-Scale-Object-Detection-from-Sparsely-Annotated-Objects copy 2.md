@@ -11,10 +11,11 @@ category:
 use_math: true
 ---
 
-:+1:
-more
+:memo: __논문 리딩 스터디 #21__: 데이터셋의 불완전성을 데이터셋 내부에서 직접 해결하는 Part-aware Sampling을 고안한 논문을 읽고 정리해봅니다.
 
 <!--more-->
+-----
+논문 링크: [Sampling Techniques for Large-Scale Object Detection from Sparsely Annotated Objects](https://arxiv.org/pdf/1811.10862.pdf)
 
 ## Abstract
 
@@ -24,7 +25,7 @@ Object Detector의 수요가 늘어남에 따라 규모가 거대한 Detection D
 
 Object Detection이 주요한 AI 기술로써 큰 관심을 받는 추세에 따라, Detector Model을 트레이닝하기 위한 거대한 데이터셋의 수요도 점점 증가하고 있습니다. 논문에서 주목하는 데이터셋은 __Open Images Dataset v4 (OID)__ 로, 160만장의 이미지에 1400만개의 Object가 500개의 카테고리로 나뉘어져 레이블링되어 있습니다. 이 거대한 데이터셋의 각 이미지는 평균 7개씩의 Object가 포함되어 있습니다. 하지만 __인간이 직접 Annotation__ 을 수행한 점이, 데이터셋의 완전성에 대한 의문을 일으킬 수밖에 없습니다. 확인된 __Annotation Recall은 43%__ 인데, 이는 즉 평균적으로 하나의 이미지에서 실제로 존재하지만 Annotation이 없는 물체가 반이 넘는다는 것입니다. 이러한 상황을 나타내는 용어를 두 가지 정의하고 가겠습니다.
 
-- Verified Object : 이미지 상의 Object들 중, 그것에 해당하는 GT(_Ground-truth_) Annotation이 있어 이미지 내 존재가 확인된 물체
+- Verified Object : 이미지 상의 Object들 중, 해당하는 GT(_Ground-truth_) Annotation이 있어 이미지 내 존재가 확인된 물체
 - Unverified Object : Verified Object와 반대로, 이미지 상에 존재하지만 그것에 해당하는 GT Annotation이 없는 물체
 
 Unverified Object가 많으면 Training 과정에서 당연히 문제가 될 수밖에 없습니다. Unverified Object들에 대한 Detection 결과가 모두 False Positive로 학습에 반영될 것이기 때문입니다. 이러한 문제를 피할 Naive한 방법 중 하나는, Objective Function을 계산하여 모델의 Loss를 구할 때, 검출된 Box 주변에 GT Annotation이 없을 경우 해당 Detection을 Objective Function 계산에 반영하지 않는 것입니다. 그러나 이 방법은 Unverified Object에 대한 검출 능력에 큰 영향을 받습니다. 따라서 Pretrain된 Detector 모델을 추가로 사용하여 Unverified Object가 있음을 알려주는 용도로 사용하는 방법을 생각할 수 있으나(Oracle), 이 또한 Pretrained Model의 성능에 따라 결과가 제한적일 수 밖에 없습니다.
@@ -60,7 +61,7 @@ $$l_{ic} = 1$$일 경우 $$i$$번째 Proposal에 Category $$c$$가 배정되었�
 
 이러한 경향의 확인 작업을 위해, 물체의 Box가 다른 물체의 Box 안에 포함되어 있는지를 정의하는 Metric인 __AIOU__(Asymmetric Intersection Over Union)를 정의합니다. 두 박스 $$b_1, b_2$$에 대한 AIOU는 $$\text{aiou}(b_1, b_2) = \frac{area(b1 \  \cap \ b_2)}{area(b_1)}$$ 으로 정의됩니다. 그리고 AIOU 점수가 특정 Threshold $$\tau$$를 넘을 경우 Part object가 Subject object에 포함되었다고 판단합니다. 이를 이용해, 전체 데이터셋 내에서 특정 Part category의 물체들이 그를 주로 포함할 것으로 예상되는 Subject category에 얼마나 포함되어 있는지 비율을 계산합니다(_Included_). 그와 동시에 Subject와 Part의 물체가 동시에 둘 다 Labeling되어 있는 경우의 비율도 계산합니다(_Co-occur_). 결과는 아래의 표와 같았습니다.
 
-![](https://user-images.githubusercontent.com/20470274/58796228-b2a51f80-8637-11e9-953f-ecdcfb08c3e6.png)
+<p align="center"><image src="/assets/posts/images/SamplingTech/figure1.png"/></p>
 
 _Included_ 줄을 보면, 전체 데이터셋에서 대부분의 Part category가 그에 해당하는 Subject category의 물체 안에 90% 이상 포함되어 있는 모습을 보입니다. 이를 통해 Part와 Subject는 서로 Spatial한 관계에 놓여 있음을 알 수 있습니다. 또한 _Co-occur_ 줄을 보면, 실제로 Part와 그에 해당하는 Subject가 이미지 내에서 같이 Labeling된 비율은 극히 적은 것을 확인할 수 있었습니다. 예를 들어 인간과 인간의 눈이 같이 레이블링된 비율은 2.8%에 불과합니다. 예상했던 문제가 크게 나타나는 것을 확인할 수 있었습니다.
 
@@ -68,9 +69,9 @@ __Part-aware Sampling__ 은 특정 Proposal에서 Classification loss를 계산�
 
 이 기법의 원리는 간단합니다. 현재 이미지 안의 모든 Annotation의 Category label들을 모은 집합을 만들수 있으며, 이를 Verified label이라고 하겠습니다. 또한 모든 카테고리에 대해, 그것이 보통 포함할 수 있는 물체들의 카테고리인 Sub-category들을 모은 세트를 정의합니다(Part와 동치). 이제 어떤 Proposal이 특정 GT Box 내에 포함되어 있다고 가정합니다. 그러면 그 Proposal이 가리키는 Object의 카테고리는 자신을 포함시키는 GT의 Sub-category일 가능성이 클 것입니다. GT의 모든 Sub-category들 중, 현재 이미지에서 Verify되지 않은 카테고리를 골라냅니다. 만약 현재 Proposal이, 골라낸 Category중 하나의 클래스로 Classify된다면, GT 중에는 그 물체에 대한 Annotation이 없으므로 False Alarm 처리되어 학습에 악영향을 미칠것입니다. 따라서 해당 Proposal이 골라낸 Category들에 대한 Classification Loss를 반영하지 않도록 만드는 것입니다. 그렇게 하면 Unverified object가 학습에 미치는 악영향을 막을 수 있습니다.
 
-![](https://user-images.githubusercontent.com/20470274/58798683-3104c000-863e-11e9-9673-5936bd8fb432.png)
+<p align="center"><image width="400" src="/assets/posts/images/SamplingTech/figure2.png"/></p>
 
-![](https://user-images.githubusercontent.com/20470274/58797368-ce5df500-863a-11e9-9893-30520dfd2116.png)
+<p align="center"><image src="/assets/posts/images/SamplingTech/figure3.png"/></p>
 
 Part-aware Sampling의 예를 보여주는 그림입니다. (a)는 이미지 상의 GT를 표시한 그림으로, 자동차와 사람에 대한 GT가 표시되어 있습니다. (b)는 Detector가 만들어낸 Proposal들입니다. (c)는 자동차와 사람의 GT 안에 포함된 Proposal들을 각각 그린 그림입니다. Part-aware Sampling을 거치면, 사람의 GT 안에 포함된 보라색 Proposal들에 대해서는 사람의 Sub-category인 '신발', '사람 얼굴' 등과의 Loss가 무시될 것입니다. 또한 자동차의 GT 안에 포함된 초록색 Proposal들에 대해서는 '번호판', '타이어' 등이 무시됩니다.
 
@@ -80,11 +81,11 @@ Part-aware Sampling과의 성능 비교를 위한 기존 Approach인 Pseudo labe
 
 미리 현재 Dataset에서 학습된 Pretrained Detector를 준비합니다. 트레이닝 이미지에 Pretrained Detector를 한번 돌리고, Detection들을 추출합니다. 그리고 추출한 Detection 중 GT Box와 겹치지 않는 Detection을 이미지 상에 __Pseudo label로 임시 레이블링__ 합니다. 예로, 아래의 이미지에서 빨간 박스는 GT Label이고, 초록 박스는 Pseudo label입니다.
 
-![](https://user-images.githubusercontent.com/20470274/59103951-31b59300-896b-11e9-9de4-bc21aa8d153c.png)
+<p align="center"><image width="500" src="/assets/posts/images/SamplingTech/figure4.png"/></p>
 
 이제 학습중인 Detector가 이미지의 Proposal들을 생성했을 때, Pseudo label과 IOU가 일정 이상인 Proposal이 있는지 확인합니다. 그리고 Pseudo label과 겹치는 Proposal에 대해서, 해당 Pseudo label의 카테고리에 대한 Loss를 무시하게 만드는 방식입니다.
 
-![](https://user-images.githubusercontent.com/20470274/59104096-9375fd00-896b-11e9-8e44-5952f9bb9166.png)
+<p align="center"><image width="400" src="/assets/posts/images/SamplingTech/figure5.png"/></p>
 
 ## Experiments
 
@@ -92,13 +93,12 @@ Part-aware Sampling과의 성능 비교를 위한 기존 Approach인 Pseudo labe
 
 주목해야 할 실험 결과는 OID를 이용한 Sampling 방법 별 mAP 비교입니다. OID의 Validation Set에서, 기존 학습과 제안된 Sampling 기법을 사용한 학습의 mAP 차이를 비교해보았더니, 확실히 성능의 향상을 볼 수 있었습니다.
 
-![](https://user-images.githubusercontent.com/20470274/59141212-bf34c980-89e3-11e9-82fb-5a5863e0ff0e.png)
+<p align="center"><image width="350" src="/assets/posts/images/SamplingTech/figure6.png"/></p>
 
 동시에 관찰된 또 하나의 놀라운 결과가 있습니다. 아래에 제시된 표와 그래프에 나타나는 바와 같이, 주로 Part에 속하는 카테고리의 물체들에 대한 mAP가 놀라운 수준으로 향상된 것입니다.
 
-![](https://user-images.githubusercontent.com/20470274/59141247-2a7e9b80-89e4-11e9-88a3-8992d7694b84.png)
+<p align="center"><image src="/assets/posts/images/SamplingTech/figure7.png"/></p>
 
-
-![](https://user-images.githubusercontent.com/20470274/59141250-42561f80-89e4-11e9-9e35-70a3f84ad88a.png)
+<p align="center"><image src="/assets/posts/images/SamplingTech/figure8.png"/></p>
 
 이러한 결과는, Part-aware Sampling이 주로 Unverified Object의 영향을 많이 받는 Part category의 물체들에 대한 검출 성능을 확실히 향상시킨다는 사실을 알려줍니다.

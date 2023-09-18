@@ -4,8 +4,8 @@
     font-size: map-get($base, font-size-h2);
     color: $text-color-l;
     text-align: center;
-    letter-spacing: map-get($spacers, 4);
-    content: "...";
+    letter-spacing: map-get($spacers, 1);
+    content: "⎯⎯⎯⎯⎯⎯⎯";
   }
 }
 

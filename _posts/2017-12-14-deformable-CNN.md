@@ -1,27 +1,30 @@
 ﻿---
 layout: article
-title:  "Deformable Convolutional Network"
+title:  "Deformable Convolutional Networks"
 date: 2017-12-14 21:00:00 -0400
 modify_date: 2017-12-14 21:00:00 -0400
 tags:
 - Deep Learning
 - Paper Reading
+- CNN
 category: 
 - deep learning
 use_math: true
 ---
 
-:+1:
-more tests.
+::memo: __논문 리딩 스터디 #6__: Convolution Filter의 모양과 크기 변형을 학습하는 Deformable Convolutional Networks 논문을 정리해봅니다.
 
 <!--more-->
+-----
+논문 링크: [Deformable Convolutional Networks](https://arxiv.org/pdf/1703.06211.pdf)
+
+### Introduction
 
 일반적인 Convolutional Network들은, Receptive Field의 크기가 고정되어 있는 형태였습니다. 이 방식은 근본적으로 한계가 있는데, 필드의 모양과 크기가 고정되어 있으므로, Sliding Window 방식으로 Convolution을 진행할 때 이미지의 특징에 상관없이 동일한 연산을 수행한다는 것입니다.  그래서 이 논문의 저자들은, 입력 이미지의 특성에 따라서 필터의 모양을 유기적으로 변형시키는 모델을 제안했습니다.
 아이디어는 간단합니다. 원래의 CNN에서 Receptive field에는 정해진 개수의 픽셀들이 입력 이미지를 커버하기 위해서 존재하는데, 이 픽셀들의 위치를 유동적으로 변경하기 위하여 Offset들을 학습하여 적용하자는 것입니다.
 
 ### Deformable Convolution
-
-![](/assets/posts/images/DeformableCNN/DF_Conv.png)
+<p align="center"><image width="500" src="/assets/posts/images/DeformableCNN/DF_Conv.png"/></p>
 
 이 그림에서 전체적인 흐름을 볼 수 있습니다. 원래 필터의 각 픽셀의 위치에 따로 학습한 Offset을 적용시켜서, 각 커버 픽셀의 위치를 유동적으로 변화시킵니다. 그렇게 만들어진 다양한 모양의 필터를 통해 Convolution을 진행합니다. 이 과정에서 Input Feature Map과 같은 크기를 가지는 Offset Field를 같이 학습합니다.
 먼저, 입력 Feature Map 상의 임의의 픽셀 $$p_0$$에 대해서, 즉 상하좌우와 대각선 4방향, 현재 위치를 포함하는 9방향을 벡터로 나타냅니다.
@@ -48,13 +51,13 @@ $$\ \ \text{when} \ \ g(a, b) = \text{max}(0, 1-|a-b|)$$
 
 ### Deformable RoI Pooling
 
-![](/assets/posts/images/DeformableCNN/DF_RoI_Pooling.png)
+<p align="center"><image width="500" src="/assets/posts/images/DeformableCNN/DF_RoI_Pooling.png"/></p>
 
 Roi Pooling은 각 bin의 Class 예측 Score map을 이용하는 PS RoI Pooling(Position Sensitive)를 기반으로 진행됩니다.
 
 PS RoI Pooling은 아래 그림 한장으로 설명이 가능합니다.
 
-![](/assets/posts/images/DeformableCNN/PS_RoI_Pooling.PNG)
+<p align="center"><image width="800" src="/assets/posts/images/DeformableCNN/PS_RoI_Pooling.PNG"/></p>
 
 임의의 RoI를 $$k \times k$$개로 나눕니다. RoI는 $$C + 1$$개의 깊이를 가지고 있습니다. $$k \times k$$개로 나누어진 RoI의 각 부분을 bin이라고 합니다. 각 bin 내의 모든 픽셀의 평균을 구해서 $$9 \times (C + 1)$$개의 값을 도출해내는데, 이제 9개씩 더해서 클래스 개수 $$(C + 1)$$개로 해당 RoI의 풀링된 대푯값들을 쌓습니다. 그럼 결과적으로 $$(C + 1)$$의 Length를 가지는 Score Map의 벡터가 나오는데, 이 벡터 9개(클래스 개수)를 1차원으로 펴서 SOFTMAX Classfier를 적용시켜 분류를 수행해냅니다.
 

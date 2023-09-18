@@ -6,17 +6,17 @@ modify_date: 2018-03-08 21:00:00 -0400
 tags:
 - Deep Learning
 - Paper Reading
+- GAN
 category: 
 - deep learning
 use_math: true
 ---
 
-:+1:
-more tests.
+::memo: __논문 리딩 스터디 #16__: GAN을 더 효과적으로 학습하기 위한 여러 방법론을 제안하는 논문입니다.
 
 <!--more-->
-
-[원 논문 : Improved Techniques for Training GANs](https://arxiv.org/pdf/1606.03498.pdf)
+-----
+논문 링크: [Improved Techniques for Training GANs](https://arxiv.org/pdf/1606.03498.pdf)
 
 ### Introduction
 GAN은 게임 이론에 기반하여 생성 모델을 학습하는 방법론입니다. 최근의 GAN 모델들은 좋은 품질의 샘플을 생성합니다. Generator와 Discriminator 모델이 서로 경쟁하면서 더 좋은 품질의 가짜 샘플을 만들어내도록 학습됩니다. 이론적으로 GAN을 트레이닝하는 과정은, 연속적이고 고차원의 파라미터들을 가진 non-convex game에서 __Nash equilibrium__ 을 찾는 일입니다. 하지만 GAN은 전형적으로 두 모델 간의 Nash Equilibrium을 찾는 일 보다는, Gradient Descent 알고리즘을 사용하여 cost 함수를 최소화하는 과정에 초점이 맞춰져 있습니다. 이론적인 방식으로 Nash Equilibrium을 찾으려고 하면, 알고리즘이 수렴에 실패할 것이기 때문입니다.
@@ -60,7 +60,7 @@ $$o(\boldsymbol{X}) \in \mathbb{R}^{n \times B}$$
  
 논문에서는 아래와 같은 그림으로 요약하고 있는데, 이렇게 봐도 이해하기 힘든 그림이긴 하지만, 이 이상으로는 그릴 수가 없어서 그대로 올려놓겠습니다.
  
-![](/assets/posts/images/ImproveGAN/figure1.PNG)
+<p align="center"><image width="600" src="/assets/posts/images/ImproveGAN/figure1.PNG"/></p>
  
 논문에서는 이런 Minibatch단위 계산을 Generator가 생성한 Sample과 실제 데이터에 대해 따로 수행하고 있습니다. 이전에는 Discriminator가 하나의 샘플만을 보고 진짜와 가짜를 구별해야 했다면, Minibatch Discrimination을 통해 구분을 위한 __Side Information__ 을 제공할 수 있게 되었다고 논문에서는 주장합니다.
  
@@ -124,10 +124,10 @@ Unsupervised Loss를 사용한 Semi-supervised Learning은 $$G$$ 모델을 트�
 Semi-supervised Learning을 도입하면, 모델의 성능 평가를 인간의 판단으로 진행헀을 때에, Generator의 이미지 생성 품질이 향상되는 놀라운 효과도 거둘 수 있었습니다. 논문에서는, 사람의 시각 시스템이 어떤 물체를 분류할 때, 물체의 특징을 파악할 수 있는 이미지의 일부에 강하게 반응하는 것과 같은 맥락이라고 설명합니다. Discriminator가 이미지의 클래스를 분류하도록 학습함으로써, 인간의 시각 시스템이 강조해서 보는 이미지의 특징을 Generator가 개발하도록 만들어준다는 것입니다.
  
 ### Experiments
-![](/assets/posts/images/ImproveGAN/figure3.PNG)
+<p align="center"><image width="600" src="/assets/posts/images/ImproveGAN/figure3.PNG"/></p>
 
 MNIST 생성 실험 결과입니다. 왼쪽은 Semi-supervised Learning만 적용한 결과이고, 오른쪽은 Minibatch Discrimination을 적용한 결과입니다.
  
-![](/assets/posts/images/ImproveGAN/figure5.PNG)
+<p align="center"><image width="700" src="/assets/posts/images/ImproveGAN/figure5.PNG"/></p>
  
 이번엔 ImageNet 데이터셋입니다. 왼쪽은 일반 DCGAN이고, 오른쪽은 이 논문의 여러 방법(Semi-supervised Learning, Feature Matching) 등을 활용한 결과입니다.
