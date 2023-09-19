@@ -39,7 +39,7 @@ Bounding Box : 물체가 들어 있는 범위를 예측한다.
 <p align="center"><image width="500" src="/assets/posts/images/FasterRCNN/FastRCNN.png"/></p>
 
 이를 통해 하나의 Region Proposal 당 하나의 CNN이 돌아가면서 느려졌던 네트워크의 구조가 획기적으로 개선되었고, 빨라질 수 있었습니다. CNN이 딱 하나만 돌아가면 되기 때문이죠.
-RoI Pooling에 대한 자세한 내용은 [제 블로그 글](http://blog.naver.com/leesoo9297/221165682280)을 참고하세요.
+RoI Pooling에 대한 자세한 내용은 [제 블로그 글](https://magmatart.dev/development/2017/12/15/33-roi-pooling.html)을 참고하세요.
 
 ### Faster R-CNN
 Fast R-CNN으로 Object Detection의 수행 속도가 많이 빨라졌지만, 아직 성능을 개선하지 못한 부분이 있었습니다. 바로 __Region Proposal__ 을 생성하는 방식이었죠.
