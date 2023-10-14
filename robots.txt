@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://magmatart.dev/sitemap.xml
+Sitemap: https://magmatart.github.io/sitemap.xml
