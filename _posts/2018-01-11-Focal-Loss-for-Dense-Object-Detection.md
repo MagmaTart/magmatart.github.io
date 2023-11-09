@@ -1,6 +1,6 @@
 ---
 layout: article
-title:  "Focal Loss for Dense Object Detection"
+title:  "[논문] Focal Loss for Dense Object Detection"
 date: 2018-01-11 21:00:00 -0400
 modify_date: 2018-01-11 21:00:00 -0400
 tags:

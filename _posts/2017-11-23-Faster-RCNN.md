@@ -1,6 +1,6 @@
 ﻿---
 layout: article
-title:  "Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks"
+title:  "[논문] Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks"
 date: 2017-11-23 21:00:00 -0400
 modify_date: 2017-11-23 21:00:00 -0400
 tags:

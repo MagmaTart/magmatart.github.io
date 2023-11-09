@@ -1,6 +1,6 @@
 ---
 layout: article
-title:  "Improved Techniques for Training GANs"
+title:  "[논문] Improved Techniques for Training GANs"
 date: 2018-03-08 21:00:00 -0400
 modify_date: 2018-03-08 21:00:00 -0400
 tags:

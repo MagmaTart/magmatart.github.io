@@ -1,6 +1,6 @@
 ﻿---
 layout: article
-title:  "Deformable Convolutional Networks"
+title:  "[논문] Deformable Convolutional Networks"
 date: 2017-12-14 21:00:00 -0400
 modify_date: 2017-12-14 21:00:00 -0400
 tags:

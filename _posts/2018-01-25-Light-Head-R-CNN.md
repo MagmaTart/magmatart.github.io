@@ -1,6 +1,6 @@
 ---
 layout: article
-title:  "Light-Head R-CNN: In Defense of Two-Stage Object Detector"
+title:  "[논문] Light-Head R-CNN: In Defense of Two-Stage Object Detector"
 date: 2018-01-25 21:00:00 -0400
 modify_date: 2018-01-25 21:00:00 -0400
 tags:

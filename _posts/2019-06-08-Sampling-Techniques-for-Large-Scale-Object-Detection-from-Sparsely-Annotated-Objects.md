@@ -1,6 +1,6 @@
 ---
 layout: article
-title:  "Sampling Techniques for Large-Scale Object Detection from Sparsely Annotated Objects"
+title:  "[논문] Sampling Techniques for Large-Scale Object Detection from Sparsely Annotated Objects"
 date:   2019-06-08 12:00:00 -0400
 modify_date: 2019-06-08 12:00:00 -0400
 tags:
